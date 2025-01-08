@@ -1,10 +1,11 @@
-## Nicolas, 27 Years
-###  👨🏻‍💻 About me
+##  👨🏻‍💻 About me
 
 * 📐 I design interfaces and code them, I like to push the limits of what I know. Working on a design system.
 * 🔐 Currently learning about devops and cloud security.
 * 🕵 CTF and escape game enjoyer.
-* 🎹 I also, sometimes, when I have time, have non-tech hobbies, like playing [Claire de lune](https://www.youtube.com/watch?v=JGJPVl7iQUM). 
+* 🎹 I also, sometimes, when I have time, have non-tech hobbies, like playing [Claire de lune](https://www.youtube.com/watch?v=JGJPVl7iQUM).
+
+###### 😆 Fun fact: I made my father quit putting me parental controls when I was 12 because I was bypassing them to play more.
 
 
 <div id="badges" align="center">
