@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Hello there 👋";
 const identity = {
@@ -33,31 +32,31 @@ const skills = ["Dev", "Sec", "Ops"];
     </style>
   </head>
   <body>
-    <Header />
-    <h1>{pageTitle}</h1>
-    <h2>... and Welcome.</h2>
-    <p>
-      This dev blog is here to showcase my journey into the dev world, and more.
-    </p>
-    <p>Here are a few facts about me:</p>
-    <ul>
-      <li>My name is {identity.firstName}.</li>
-      <li>
-        I live in {identity.country} and I work as a {identity.occupation}.
-      </li>
-      {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Two of my hobbies are: {identity.hobbies[0]} and{" "}
-            {identity.hobbies[1]}
-          </li>
-        )
-      }
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-      {skills.map((skill) => <li class="skills">{skill}</li>)}
-    </ul>
-    <Footer />
+    <BaseLayout pageTitle={pageTitle}>
+      <h2>... and Welcome.</h2>
+      <p>
+        This dev blog is here to showcase my journey into the dev world, and
+        more.
+      </p>
+      <p>Here are a few facts about me:</p>
+      <ul>
+        <li>My name is {identity.firstName}.</li>
+        <li>
+          I live in {identity.country} and I work as a {identity.occupation}.
+        </li>
+        {
+          identity.hobbies.length >= 2 && (
+            <li>
+              Two of my hobbies are: {identity.hobbies[0]} and{" "}
+              {identity.hobbies[1]}
+            </li>
+          )
+        }
+      </ul>
+      <p>My skills are:</p>
+      <ul>
+        {skills.map((skill) => <li class="skills">{skill}</li>)}
+      </ul>
+    </BaseLayout>
   </body>
 </html>
