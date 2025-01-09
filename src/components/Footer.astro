@@ -3,14 +3,18 @@ import Social from "./Social.astro";
 ---
 
 <footer>
-  <Social platform="github" username="NicolasVelay" />
-  <Social platform="linkedin" username="NicolasVelay" />
+  <Social link="https://github.com/NicolasVelay" icon="github" />
+  <Social link="https://www.linkedin.com/in/nicolasvelay/" icon="linkedin" />
+  <Social link="mailto:nicolas.velay@free.fr" icon="mail" />
 </footer>
 
 <style>
   footer {
     display: flex;
+    align-items: end;
+    justify-content: end;
     gap: 1rem;
     margin-top: 2rem;
+    bottom: 2px;
   }
 </style>
