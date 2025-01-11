@@ -1,21 +1,34 @@
 ---
+import Logo from "./Logo.astro";
 import Navigation from "./Navigation.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header>
     <nav>
+        <Logo />
+        <div class="space"></div>
         <Navigation />
         <ThemeIcon />
     </nav>
 </header>
-<script>
-    import "../scripts/menu.js";
-</script>
 <style>
     nav {
         display: flex;
         flex-direction: row;
         justify-content: end;
+        align-items: center;
+    }
+    header {
+        position: sticky;
+        top: 16px;
+        background-color: #efefefce;
+        backdrop-filter: blur(5px);
+    }
+    :global(.dark) header {
+        background-color: #222222ce;
+    }
+    .space {
+        flex: 1;
     }
 </style>

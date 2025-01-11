@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="container">
+    <Icon class="icon" name="logo" width={30} height={30} />
+    <a href="/">Nicolas</a>
+</div>
+<style>
+    a {
+        font-size: 28px;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+        &:hover {
+            color: #ff9776;
+            transition: color 0.3s ease-out;
+        }
+    }
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+    :global(.dark) a {
+        color: white;
+        &:hover {
+            color: #ff9776;
+            transition: color 0.3s ease-out;
+        }
+    }
+</style>

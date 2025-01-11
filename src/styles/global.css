@@ -1,6 +1,6 @@
 html {
-    background-color: #f1f5f9;
-    font-family: sans-serif;
+    background-color: #efefef;
+    font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -26,7 +26,7 @@ h1 {
 
 
 html.dark {
-    background-color: #0d0950;
+    background-color: #222222;
     color: #fff;
 }
 
