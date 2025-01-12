@@ -1,9 +1,9 @@
 ---
-title: 'When I was looking for a great logo Icon'
-description: 'This is the first post of my new Astro blog.'
+title: 'When I was looking for a great blog logo'
+description: 'And I was too lazy to search, so I made it.'
 pubDate: 2022-07-01
-tags: ["astro", "blogging", "learning in public"]
-theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw"
+tags: ["astro", "figma", "design", "icon"]
+theme: "https://www.youtube.com/watch?v=6PDmZnG8KsM"
 shown: false
 ---
 # My First Blog Post

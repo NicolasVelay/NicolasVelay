@@ -4,6 +4,7 @@ description: 'Or when I decided to make a blog with an (almost) full new stack a
 pubDate: 2025-12-03
 tags: ["astro", "blogging", "learning in public"]
 theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw" 
+shown: true
 ---
 
 So it begins. New year new me, and I've wanted to start a blog for quite some time now. 
@@ -62,7 +63,7 @@ Ok our bucket is set up. Or is it ? Yeah did you think that just unchecking publ
 - Go to the permission tab.
 - Edit the bucket policy and add the following. (Be mindful to change your arn with your actual bucket name)
 
-```json
+```json 
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -107,16 +108,15 @@ We created an admin IAM user which is admin. Now we need to retrieve its access 
 - Go to the security credentials tab.
 - Create an access key. (Select CLI for use case)
 
-Now on linux, install the awscli and configure you cli. On Ubuntu:
+Now on linux, install the aws cli. On Ubuntu:
 
-```sh
+```sh title="Installing the aws cli"
 apt install awscli
-aws configure
 ```
 
-Then paste your previously created access key ID and value. Your default region name, and the output format (XML or JSON)
+Then configure and paste your previously created access key ID and value. Your default region name, and the output format (XML or JSON)
 
-```sh
+```sh title="Configuring the aws cli" {3, 4}
 aws configure
 
 AWS Access Key ID [None]: ***************
@@ -127,7 +127,7 @@ Default output format [None]: JSON
 
 And now, the magic begins. We can use the CLI to copy the /dist local folder to our bucket:
 
-```sh
+```sh title="Copying your local files to the bucket"
 s3 sync build/ s3://<MY_BUCKET_NAME>
 ```
 
