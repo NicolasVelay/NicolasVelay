@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-const { title, pubDate, music, minutesRead } = Astro.props.frontmatter;
+const { title, pubDate, theme, minutesRead } = Astro.props.frontmatter;
 ---
 
 <BaseLayout pageTitle={title}>
@@ -17,7 +17,7 @@ const { title, pubDate, music, minutesRead } = Astro.props.frontmatter;
         |
         <p>{minutesRead}</p>
         |
-        <a href={music} target="_blank">Theme</a>
+        <a href={theme} target="_blank">Theme</a>
     </div>
     <slot />
 </BaseLayout>
