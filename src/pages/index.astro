@@ -1,7 +1,66 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import BlogPost from "../components/BlogPost.astro";
+
+const allPosts = await getCollection("blog");
 ---
 
-<BaseLayout pageTitle={"Hello there 👋"} htmlTitle="Nicolas Velay">
-    <h4>Software engineer and tech enthusiast.</h4>
+<BaseLayout pageTitle={"Nicolas Velay"} htmlTitle="Nicolas Velay">
+    <h4>Tech enthusiast</h4>
+    <p>
+        Yup that's me... I am an UX Engineer and I learn and share about more
+        tech-related stuff, currently on a journey to learn <s>AI</s>
+        <s>Cybersecurity</s>
+        <s>DevOps</s>
+        <b>DevSecOps</b>, but I have a new hobby each 3 months, like a normal
+        person, so it will probably change.
+    </p>
+    <p>
+        I want to understand how things work, and therefore I like to break
+        stuff, sometimes I even do it on purpose. I do tech thingies with the
+        family, we currently have another project that will revolutionize the
+        world, again. I am happy to do that with them, it's memories we share
+        through code.
+    </p>
+    <p>Welcome to my personal space.</p>
+    <div class="posts">
+        <h3>Latest Posts</h3>
+        <p class="separator"></p>
+        <a href="/posts">All posts</a>
+    </div>
+    <ul>
+        {
+            allPosts
+                .reverse()
+                .slice(0, 3)
+                .map((post: any) => (
+                    <BlogPost
+                        url={`/posts/${post.id}/`}
+                        title={post.data.title}
+                        description={post.data.description}
+                    />
+                ))
+        }
+    </ul>
 </BaseLayout>
+<style>
+    h4 {
+        margin-top: -20px;
+    }
+    ul {
+        padding: 0;
+    }
+    .posts {
+        padding-top: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        > a {
+            text-decoration: none;
+        }
+    }
+    .separator {
+        flex: 1;
+    }
+</style>

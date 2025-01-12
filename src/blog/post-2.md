@@ -4,7 +4,7 @@ description: 'This is the first post of my new Astro blog.'
 pubDate: 2022-07-01
 tags: ["astro", "blogging", "learning in public"]
 theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw"
-
+shown: false
 ---
 # My First Blog Post
 
