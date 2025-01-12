@@ -4,14 +4,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 
 const allPosts = await getCollection("blog");
-const pageTitle = "Posts | Nicolas Velay";
+const pageTitle = "Posts";
+const htmlTitle = "Posts | Nicolas Velay";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} htmlTitle={htmlTitle}>
   <ul>
     {
       allPosts.map((post: any) => (
-        <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
+        <BlogPost
+          url={`/posts/${post.id}/`}
+          title={post.data.title}
+          description={post.data.description}
+        />
       ))
     }
   </ul>

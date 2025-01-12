@@ -28,8 +28,29 @@ h1 {
 html.dark {
     background-color: #222222;
     color: #fff;
+
+    & a {
+        color: white;
+
+        &:hover {
+            color: #ff9776;
+            transition: color 0.3s ease-out;
+        }
+
+    }
 }
 
 .dark .nav-links a {
     color: #fff;
+}
+
+a {
+    color: black
+}
+
+a {
+    &:hover {
+        color: #ff9776;
+        transition: color 0.3s ease-out;
+    }
 }

@@ -1,30 +1,35 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+const { title, pubDate, music, minutesRead } = Astro.props.frontmatter;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-    <p>{frontmatter.pubDate.toLocaleDateString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+<BaseLayout pageTitle={title}>
+    <div class="info">
+        <p>
+            {
+                pubDate.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                })
+            }
+        </p>
+        |
+        <p>{minutesRead}</p>
+        |
+        <a href={music} target="_blank">Theme</a>
+    </div>
     <slot />
 </BaseLayout>
 <style>
     a {
-        color: #00539f;
+        text-decoration: none;
     }
 
-    .tags {
+    .info {
         display: flex;
-        flex-wrap: wrap;
-    }
-
-    .tag {
-        margin: 0.25em;
-        border: dotted 1px #a1a1a1;
-        border-radius: 0.5em;
-        padding: 0.5em 1em;
-        font-size: 1.15em;
-        background-color: #f8fcfd;
+        gap: 8px;
+        align-items: center;
+        margin-top: -30px;
     }
 </style>
