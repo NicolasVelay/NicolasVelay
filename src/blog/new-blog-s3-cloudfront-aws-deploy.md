@@ -222,4 +222,4 @@ We made the bucket public, but it is not secure, let's now remove the option
 
 | Now we're done, right ?
 
-Yes, congratulations ! You now have a fully functionnal static blog hosted on AWS. Isn't that cool ?
+Yes, congratulations ! 🎉🎉🎉  You now have a fully functionnal static blog hosted on AWS. Isn't that cool ?
