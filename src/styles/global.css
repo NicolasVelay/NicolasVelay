@@ -1,6 +1,7 @@
 html {
     background-color: #efefef;
     font-family: "Montserrat", sans-serif;
+    scroll-padding-top: 90px;
 }
 
 body {

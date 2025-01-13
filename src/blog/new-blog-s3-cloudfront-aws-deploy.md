@@ -7,6 +7,8 @@ theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw"
 shown: true
 ---
 
+## New beginnings
+
 So it begins. New year new me, and I've wanted to start a blog for quite some time now. 
 My motivations are ***simple***, I want to share cool stuff I learn. 
 
@@ -30,7 +32,7 @@ npm run build
 ```
 You now have a /dist folder with all your assets. The blog is ready, it's time to deploy. (Note that we used Astro, but you could also use old-fashioned React or Vue...)
 
-## Deploying... with a brand new stack.
+### Deploying... with a brand new stack.
 
 Ever heard of Vercel, Netlify, Github Pages ? Please use that if you want something done quick, otherwise...
 
@@ -41,7 +43,7 @@ Let's begin:
 - Create your AWS account. 
 - Select your region, be careful, price can change depending on region.
 
-### S3
+## S3
 
 So S3 is where you put your /dist (or /build) files, it's like an online folder. It's easy enough to understand. You first need to create a new S3 bucket (that's how amazon call their folders).
 
@@ -90,11 +92,9 @@ We could also use the aws CLI.
 
 No trust me, this one is cool. 
 
-## How to feel like Neo: use the AWS CLI
+### How to feel like Neo: use the AWS CLI
 
 So one of the good practice in AWS is to create an user for each of what you do, this way, if the user is compromised, your whole AWS account won't turn Skynet.
-
-### Create an IAM user
 
 "IAM" is the AWS service to create users and attach policies (what they can do) to them.
 
@@ -160,7 +160,7 @@ It's heavily summarized but AWS is pinging the CNAME name (which is part of your
 - Input in the CNAME name the one you copied from ACM, same for the CNAME value.
 - Wait that your domain is certified.
 
-### Back to Cloudfront
+### Create your distribution
 
 Now we can create a distribution in Cloudfront, which is where you'll be able to set some settings about cache, security, redirection...
 
@@ -175,7 +175,7 @@ We now have a more secure distribution, that will handle cache by default, it's 
 
 You can now go to the "General" tab of your distribution detail and go to the url under "Distribution domain name", it's your distribution URL, and now you have a lock icon indicating that the browser is using https, cool.
 
-### Redirection in your registrar
+### Redirect in your registrar
 
 Remember when we talked about CNAME redirection for the certificate ? We have to do the same but for your domain name.
 

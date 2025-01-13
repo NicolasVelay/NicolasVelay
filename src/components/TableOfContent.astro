@@ -1,0 +1,69 @@
+---
+import type { MarkdownHeading } from "astro";
+import TableOfContentHeading from "./TableOfContentHeading.astro";
+
+interface Props {
+    headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const tableOfContent = buildToc(headings);
+
+function buildToc(headings: MarkdownHeading[]) {
+    const toc: MarkdownHeading[] = [];
+    const parentHeadings = new Map();
+    headings.forEach((h) => {
+        const heading = { ...h, subheadings: [] };
+        parentHeadings.set(heading.depth, heading);
+        if (heading.depth === 2) {
+            toc.push(heading);
+        } else {
+            parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+        }
+    });
+    return toc;
+}
+---
+
+<nav>
+    <ul>
+        {
+            tableOfContent.map((heading) => (
+                <TableOfContentHeading heading={heading} />
+            ))
+        }
+    </ul>
+</nav>
+<style>
+    nav {
+        position: fixed;
+        top: 150px;
+        right: 100px;
+    }
+    ul {
+        list-style-type: none;
+    }
+</style>
+<script>
+    function addIntersectionObserver() {
+        const observer = new IntersectionObserver((sections) => {
+            sections.forEach((section) => {
+                const heading = section.target.querySelector("h2");
+                if (!heading) return;
+                const id = heading.getAttribute("id");
+
+                const link = document.querySelector(`a[href="#${id}"]`);
+                if (!link) return;
+
+                const addRemove =
+                    section.intersectionRatio > 0 ? "add" : "remove";
+                link.classList[addRemove]("active");
+            });
+        });
+
+        document.querySelectorAll("section").forEach((section) => {
+            observer.observe(section);
+        });
+    }
+    addIntersectionObserver();
+</script>

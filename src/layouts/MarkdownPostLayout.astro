@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-const { title, pubDate, theme, minutesRead } = Astro.props.frontmatter;
+import TableOfContent from "../components/TableOfContent.astro";
+const { title, pubDate, theme } = Astro.props.frontmatter;
+const { minutesRead, headings } = Astro.props;
 ---
 
 <BaseLayout pageTitle={title}>
+    <TableOfContent headings={headings} />
     <div class="info">
         <p>
             {
@@ -19,13 +22,14 @@ const { title, pubDate, theme, minutesRead } = Astro.props.frontmatter;
         |
         <a href={theme} target="_blank">Theme</a>
     </div>
-    <slot />
+    <article id="article">
+        <slot />
+    </article>
 </BaseLayout>
 <style>
     a {
         text-decoration: none;
     }
-
     .info {
         display: flex;
         gap: 8px;

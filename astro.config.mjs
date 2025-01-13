@@ -1,6 +1,6 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import sectionize from 'remark-sectionize'
 import icon from "astro-icon";
 
 import expressiveCode from 'astro-expressive-code';
@@ -10,7 +10,7 @@ export default defineConfig({
   site: "https://nicolasvelay.nybtech.fr",
   integrations: [icon(), expressiveCode()],
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, sectionize],
     shikiConfig: {
       theme: 'dracula',
     },
