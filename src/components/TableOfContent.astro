@@ -37,8 +37,13 @@ function buildToc(headings: MarkdownHeading[]) {
 <style>
     nav {
         position: fixed;
-        top: 150px;
-        right: 100px;
+        top: 100px;
+        right: 5%;
+    }
+    @media only screen and (max-width: 1650px) {
+        nav {
+            visibility: hidden;
+        }
     }
     ul {
         list-style-type: none;
@@ -46,20 +51,26 @@ function buildToc(headings: MarkdownHeading[]) {
 </style>
 <script>
     function addIntersectionObserver() {
-        const observer = new IntersectionObserver((sections) => {
-            sections.forEach((section) => {
-                const heading = section.target.querySelector("h2");
-                if (!heading) return;
-                const id = heading.getAttribute("id");
+        const observer = new IntersectionObserver(
+            (sections) => {
+                sections.forEach((section) => {
+                    const heading = section.target.querySelector("h2");
+                    if (!heading) return;
+                    const id = heading.getAttribute("id");
 
-                const link = document.querySelector(`a[href="#${id}"]`);
-                if (!link) return;
+                    const link = document.querySelector(`a[href="#${id}"]`);
+                    if (!link) return;
 
-                const addRemove =
-                    section.intersectionRatio > 0 ? "add" : "remove";
-                link.classList[addRemove]("active");
-            });
-        });
+                    const addRemove =
+                        section.intersectionRatio > 0 ? "add" : "remove";
+                    link.classList[addRemove]("active");
+                });
+            },
+            {
+                threshold: 0,
+                rootMargin: "-49% 0px",
+            },
+        );
 
         document.querySelectorAll("section").forEach((section) => {
             observer.observe(section);

@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 
 <a href="/" class="container">
     <Icon class="icon" name="logo" width={30} height={30} />
-    Nicolas
+    <p>Nicolas</p>
 </a>
 <style>
     a {
@@ -15,6 +15,9 @@ import { Icon } from "astro-icon/components";
             color: #ff9776;
             transition: color 0.3s ease-out;
         }
+    }
+    p {
+        font-size: medium;
     }
     .container {
         display: flex;

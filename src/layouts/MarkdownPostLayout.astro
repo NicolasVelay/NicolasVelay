@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import TableOfContent from "../components/TableOfContent.astro";
+import convertHtml from "../tools/convertHTML";
+import "remark-github-blockquote-alert/alert.css";
+
 const { title, pubDate, theme } = Astro.props.frontmatter;
-const { minutesRead, headings } = Astro.props;
+const { minutesRead, headings, html } = Astro.props;
 ---
 
 <BaseLayout pageTitle={title}>
@@ -23,7 +26,7 @@ const { minutesRead, headings } = Astro.props;
         <a href={theme} target="_blank">Theme</a>
     </div>
     <article id="article">
-        <slot />
+        <Fragment set:html={convertHtml(html)} />
     </article>
 </BaseLayout>
 <style>

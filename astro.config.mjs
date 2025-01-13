@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import { remarkAlert } from "remark-github-blockquote-alert";
 import sectionize from 'remark-sectionize'
 import icon from "astro-icon";
 
@@ -10,7 +11,7 @@ export default defineConfig({
   site: "https://nicolasvelay.nybtech.fr",
   integrations: [icon(), expressiveCode()],
   markdown: {
-    remarkPlugins: [remarkReadingTime, sectionize],
+    remarkPlugins: [remarkReadingTime, sectionize, remarkAlert],
     shikiConfig: {
       theme: 'dracula',
     },

@@ -1,6 +1,6 @@
 html {
     background-color: #efefef;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Inter Variable', sans-serif;
     scroll-padding-top: 90px;
 }
 
@@ -27,7 +27,7 @@ h1 {
 
 
 html.dark {
-    background-color: #222222;
+    background-color: #191919;
     color: #fff;
 
     & a {
@@ -39,6 +39,10 @@ html.dark {
         }
 
     }
+
+    & .markdown-alert {
+        background-color: #2a2a2a;
+    }
 }
 
 .dark .nav-links a {
@@ -46,12 +50,27 @@ html.dark {
 }
 
 a {
-    color: black
-}
+    color: black;
 
-a {
     &:hover {
         color: #ff9776;
         transition: color 0.3s ease-out;
     }
+}
+
+
+
+/* Markdown alerts */
+
+.markdown-alert {
+    padding-top: 4px;
+    margin-left: 16px;
+    background-color: #eae7e7;
+    border-radius: 0px 8px 8px 0px;
+    box-shadow: rgba(0, 0, 0, 0.357) 1.6px 1.6px 3.2px 0px;
+
+}
+
+.markdown-alert-title {
+    margin-top: 7px;
 }
