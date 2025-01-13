@@ -223,3 +223,5 @@ We made the bucket public, but it is not secure, let's now remove the option
 | Now we're done, right ?
 
 Yes, congratulations ! 🎉🎉🎉  You now have a fully functionnal static blog hosted on AWS. Isn't that cool ?
+
+Next we will want to setup a pipeline so that we don't have to update manually the S3 bucket each time we push a new change to our blog. We will set up a github actions in a next post. You used Github to save everything up till now right?... right?
