@@ -141,7 +141,7 @@ Default output format [None]: JSON
 And now, the magic happens. We can use the CLI to copy the /dist local folder to our bucket:
 
 ```sh title="Copying your local files to the bucket"
-s3 sync dist/ s3://<MY_BUCKET_NAME>
+aws s3 sync dist/ s3://<MY_BUCKET_NAME>
 ```
 <p></p>
 
