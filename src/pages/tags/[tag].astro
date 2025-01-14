@@ -24,13 +24,29 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout pageTitle={tag}>
-    <p>Posts tagged with {tag}</p>
+<BaseLayout
+    pageTitle={`Posts tagged with ${tag}`}
+    htmlTitle={`${tag} | Nicolas Velay`}
+>
     <ul>
         {
-            posts.map((post) => (
-                <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
-            ))
+            posts
+                .filter((post) => post.data.shown)
+                .map((post: any) => (
+                    <BlogPost
+                        url={`/posts/${post.id}/`}
+                        title={post.data.title}
+                        description={post.data.description}
+                    />
+                ))
         }
     </ul>
 </BaseLayout>
+<style>
+    ul {
+        padding: 0px;
+    }
+    p {
+        margin-top: -20px;
+    }
+</style>

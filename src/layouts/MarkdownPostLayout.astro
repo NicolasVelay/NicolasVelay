@@ -3,8 +3,9 @@ import BaseLayout from "./BaseLayout.astro";
 import TableOfContent from "../components/TableOfContent.astro";
 import convertHtml from "../tools/convertHTML";
 import "remark-github-blockquote-alert/alert.css";
+import Tag from "../components/Tag.astro";
 
-const { title, pubDate, theme } = Astro.props.frontmatter;
+const { title, pubDate, theme, tags } = Astro.props.frontmatter;
 const { minutesRead, headings, html } = Astro.props;
 ---
 
@@ -28,6 +29,7 @@ const { minutesRead, headings, html } = Astro.props;
     <article id="article">
         <Fragment set:html={convertHtml(html)} />
     </article>
+    <div class="tags">{tags.map((tag: string) => <Tag link=`/tags/${tag}` value={tag}/>)}</div>
 </BaseLayout>
 <style>
     a {
@@ -38,5 +40,11 @@ const { minutesRead, headings, html } = Astro.props;
         gap: 8px;
         align-items: center;
         margin-top: -30px;
+    }
+    .tags {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 8px
     }
 </style>

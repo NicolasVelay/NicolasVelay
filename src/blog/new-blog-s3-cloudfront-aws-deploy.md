@@ -2,7 +2,7 @@
 title: 'Welcome to the jungle'
 description: 'Or when I decided to make a blog with an (almost) full new stack and deploy it.'
 pubDate: 2025-01-14
-tags: ["astro", "blogging", "learning in public"]
+tags: ["AWS", "Devops", "Astro"]
 theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw" 
 shown: true
 ---
