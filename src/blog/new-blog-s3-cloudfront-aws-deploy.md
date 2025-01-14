@@ -1,7 +1,7 @@
 ---
 title: 'Welcome to the jungle'
 description: 'Or when I decided to make a blog with an (almost) full new stack and deploy it.'
-pubDate: 2025-12-03
+pubDate: 2025-01-14
 tags: ["astro", "blogging", "learning in public"]
 theme: "https://www.youtube.com/watch?v=tGsKzZtRwxw" 
 shown: true
@@ -42,16 +42,16 @@ Time to use the AWS suite, specifically S3 and CloudFront. AWS amplify exists al
 
 ## S3
 
-First, you'll need to create a new AWS account if you don't have one.
+First, we'll need to create a new AWS account if we don't have one.
 
-- Create your AWS account. 
-- Select your region.
+- Create an AWS account. 
+- Select a region.
 
 > [!WARNING]
 > Pricing depend on usage of the different services and region.
 
 
-S3 (for Simple Storage Service) is where you put your /dist (or /build) files, it's like an online folder. It's easy enough to understand. You first need to create a new S3 bucket (that's how amazon call their folders).
+S3 (for Simple Storage Service) is where we put our /dist (or /build) files, it's like an online folder. It's easy enough to understand. We first need to create a new S3 bucket (that's how amazon call their folders).
 
 - Search the S3 service on the top search bar, select it and click "create bucket".
 - Change the bucket name to be the same as your domain name. (e.g nicolasvelay.com)
@@ -62,12 +62,12 @@ S3 (for Simple Storage Service) is where you put your /dist (or /build) files, i
 
 *Hell no*
 
-- Go to the bucket list and select your newly created bucket. 
+- Go to the bucket list and select our newly created bucket. 
 - Click on the "Properties" tab.
 - Scroll until "Static web hosting", select edit and enable it.
-- "Index document" should be index.html, "Error document" should be whatever html document you made for 404 errors.
+- "Index document" should be index.html, "Error document" should be whatever html document we made for 404 errors.
 
-Ok our bucket is set up. ***Or is it?*** Yeah did you think that just unchecking public access would do ? No, no, no... AWS got a lot of security features, and we need to add a policy for the bucket. 
+Ok our bucket is set up. ***Or is it?*** Yeah did you think that just unchecking public access would do ? No, no, no... AWS got a lot of security features, and we need to add a policy for the bucket.
 
 - Go to the permission tab.
 - Edit the bucket policy and add the following. (Be mindful to change your arn with your actual bucket name, e.g nicolasvelay.com)
@@ -89,12 +89,13 @@ Ok our bucket is set up. ***Or is it?*** Yeah did you think that just unchecking
 <p></p>
 
 
+
 > [!NOTE]
-> "Arn" are identifiers for your ressources at AWS, since there is a lot of services, we need unique identifiers. 
+> "Arn" are identifiers for our ressources in AWS, since there is a lot of services, we need unique identifiers. 
 
 | Please tell me we are done... 
 
-Yeah, we are done for bucket configuration. Now we need to put our local /dist folder (the thing we build earlier) into the bucket. There is an upload button in the "Objects" tab of your bucket, simple, easy.
+Yeah, we are done for the bucket configuration. Now we need to put our local /dist folder (the thing we build earlier) into our bucket. There is an upload button in the "Objects" tab of your bucket, simple, easy.
 
 ***Or...***
 
@@ -151,14 +152,14 @@ We can now look into our previously created bucket and see your files in the "Ob
 
 <img height=300 src="https://i.gifer.com/2Gb.gif" alt="Magic" />
 
-You now have access to your site.
+We now have access to our site.
 
 > [!IMPORTANT]
 > We will continue, erm... not using the aws cli. But note that everything that we will do through the UI can be done with the aws cli. 
 
 | So.. we're done ?
 
-Your site is ... not secure unfortunately, noted by the lock icon in the navbar of your browser. Also, what in hell is this URL ? Do we really want to share that ? No, no, no... So it is time for...
+Our site is ... not secure unfortunately, noted by the lock icon in the navbar of the browser. Also, nothing is cached, so everytime a user access a ressource, we're in for the full download. And finally... what in hell is this URL ? Do we really want to share that ? No, no, no... So it is time for...
 
 ## CloudFront
 
@@ -186,42 +187,66 @@ I'll heavily summarize but AWS is "pinging" the CNAME name (which is a subdomain
 
 Now we can create a distribution in Cloudfront (for ... Cloudfront. <small><small>Who comes up with these names anyway?</small></small>) this is a content delivery network (CDN) where you'll be able to set some settings like cache and security.
 
-- Go to the Cloudfront service and select your bucket as "origin domain". (AWS kindly tells us to use the "website endpoint", so let's do that)
+- Go to the Cloudfront service and select your bucket as "origin domain". (AWS kindly tells us to use the "website endpoint", but we won't do that.)
+- Select Origin access control settings (recommended) and then create a new OAC. Create it with the default parameters.
 - Scroll until "Viewer protocol policy" and select "Redirect HTTP to HTTPS".
-- You can disable the WAF for now. It's a paid feature, but it's a must-have if your site needs to be secure.
+- You can disable the WAF for now. 
 - Add an "Alternate domain name (CNAME)" with the value of your domain name. 
 - Select the custom SSL certificate that you just created. 
+- In "Default root object" input "index.html".
 - Create the distribution.
 
-We now have a more secure distribution, that will handle cache by default, it's a must over S3. (And it will lower the costs !)
+| Wow, that's a lot...
+
+We' re closing in. Now that we have created the distribution, AWS will remind us with a yellow banner to update the S3 bucket policy to let Cloudfront access it. The policy should look like that:
+
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "<YOUR_BUCKET_ARN>",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "<YOUR_DISTRIBUTION_ARN>"
+                }
+            }
+        }
+    ]
+}
+```
+
+- Go to your S3 bucket, select the "Permission tab"
+- Edit the bucket policy and overwrite it withthe policy given after the creation of the distribution
+
+We now have a more secure distribution, that will also handle cache, it's a must over S3. (And it will lower the costs !)
 
 We can now go to the "General" tab of our distribution detail and click on the url under "Distribution domain name", it's our distribution URL, and now we have a lock icon indicating that the browser is using https.
 
-<img height=300 src="https://media1.tenor.com/m/qVKlQMB2DpsAAAAd/hacker-hacking.gif" alt="Take that hackers!" />
+<img height=300 src="https://media1.tenor.com/m/VHqaWIIwV0YAAAAd/hacker.gif" alt="Take that hackers!" />
 
-<!-- ![magic](https://media1.tenor.com/m/qVKlQMB2DpsAAAAd/hacker-hacking.gif) -->
-
-However, the URL is kinda ugly and you don't want to share this one with your Grandma, or else she might think it is a phishing link. (Who said elder people cannot recognize malicious links? Wake up, it's not 2010 anymore.)
+However, the URL is kinda ugly and we don't want to share this with Grandma, or else she might think it is a phishing link. (Who said elder people cannot recognize malicious links? Wake up, it's not 2010 anymore.)
 
 ### Redirect in your registrar
 
-Remember when we talked about CNAME redirection for the certificate ? We have to do the same but for your domain name.
+Remember when we talked about adding a CNAME record for the certificate ? We have to do the same but for our domain name.
 
 - Again, go to your Domain Name registrar and add a CNAME record.
 - Input in the CNAME name your domain name (e.g nicolasvelay.com), and for the CNAME value, your distribution URL.
 
-Now your domain name is redirecting to your cloudfront distribution.
-
-### Cleaning up
-
-We made the bucket public, but it is not secure, let's now remove the option
-
-- Go to your bucket details.
-- Go to the "Permissions" tab and edit "Block public access"
-- Check "Block all public access" and save changes
+Now our domain name is redirecting to our Cloudfront distribution.
 
 | Now we're done, right ?
 
-Yes, congratulations ! 🎉🎉🎉  You now have a fully functionnal static blog hosted on AWS. Isn't that cool ?
+Yes, congratulations !  🎉🎉🎉  
+
+We now have a fully functionnal static blog hosted on AWS. Isn't that cool ?
 
 Next we will want to setup a pipeline so that we don't have to update manually the S3 bucket each time we push a new change to our blog. We will set up a github actions in a next post. You used Github to save everything up till now right?... right?
