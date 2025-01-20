@@ -127,7 +127,7 @@ Now on linux, install the aws cli. On Ubuntu:
 apt install awscli
 ```
 
-Then configure and paste your previously created access key ID and value. Your default region name, and the output format (XML or JSON)
+Then configure and paste your previously created access key ID and value. Your default region name, and the output format (xml or json) in lowercase.
 
 ```sh title="Configuring the aws cli" {3, 4}
 aws configure
@@ -135,7 +135,7 @@ aws configure
 AWS Access Key ID [None]: ***************
 AWS Secret Access Key [None]: **************
 Default region name [None]: <YOUR_AWS_REGION>
-Default output format [None]: JSON
+Default output format [None]: json
 ```
 
 And now, the magic happens. We can use the CLI to copy the /dist local folder to our bucket:
