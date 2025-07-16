@@ -5,7 +5,7 @@
 * 🕵 CTF and escape game enjoyer.
 * 🎹 I also, sometimes, when I have time, have non-tech hobbies, like playing [Claire de lune](https://www.youtube.com/watch?v=JGJPVl7iQUM).
 
-###### 😆 Fun fact: I made my father quit putting me parental controls when I was 12 because I was bypassing them to play more.
+###### 😆 Fun fact: I became interested in "hacking" when I played cat and mouse with my father about a gaming parental control.
 
 
 <div id="badges" align="center">
